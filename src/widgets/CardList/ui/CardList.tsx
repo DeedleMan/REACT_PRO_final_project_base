@@ -1,4 +1,5 @@
-import { Card } from '../../../shared/ui/Card';
+import { Card } from '../../../entities/product';
+import { PageHeader } from '../../../shared/ui/PageHeader';
 import s from './CardList.module.css';
 
 type CardListProps = {
@@ -7,7 +8,7 @@ type CardListProps = {
 };
 export const CardList = ({ title, products }: CardListProps) => {
 	if (!products.length) {
-		return <h1 className='header-title'>Товар не найден</h1>;
+		return <PageHeader title='Товар не найден' />;
 	}
 
 	return (

@@ -9,6 +9,14 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
+		'import/resolver': {
+			node: {
+				extensions: ['.js', '.jsx', '.ts', '.tsx'],
+			},
+			webpack: {
+				config: 'webpack/webpack.common.js',
+			},
+		},
 	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',

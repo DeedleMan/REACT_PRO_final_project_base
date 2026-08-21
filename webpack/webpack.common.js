@@ -5,6 +5,8 @@ const path = require('path'); //для того чтобы превратить 
 const webpack = require('webpack');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
+const srcPath = path.resolve(__dirname, '..', './src');
+
 const production = process.env.NODE_ENV === 'production';
 
 module.exports = {
@@ -71,6 +73,14 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'], //указываем файлы с которыми будет работать webpack
+		alias: {
+			'@app': path.resolve(srcPath, 'app'),
+			'@pages': path.resolve(srcPath, 'pages'),
+			'@widgets': path.resolve(srcPath, 'widgets'),
+			'@features': path.resolve(srcPath, 'features'),
+			'@entities': path.resolve(srcPath, 'entities'),
+			'@shared': path.resolve(srcPath, 'shared'),
+		},
 	},
 	plugins: [
 		new HTMLWebpackPlugins({

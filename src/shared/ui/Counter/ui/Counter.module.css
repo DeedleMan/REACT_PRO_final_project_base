@@ -1,0 +1,8 @@
+.button-count {
+	display: inline-flex;
+	align-items: center;
+	height: 48px;
+	background-color: #ffffff;
+	border: 1px solid #cfd8dc;
+	border-radius: 100px;
+}
