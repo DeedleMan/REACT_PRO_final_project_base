@@ -5,14 +5,16 @@ import truckSVG from '../../../shared/assets/icons/truck.svg';
 import qualitySVG from '../../../shared/assets/icons/quality.svg';
 import { Rating } from '../../../shared/ui/Rating';
 import { ButtonBack } from '../../../shared/ui/ButtonBack';
-import { LikeButton } from '../../../shared/ui/LikeButton';
-import { ReviewList } from '../../../widgets/ReviewList/ui/ReviewList';
-import { WithProtection } from '../../../shared/store/HOCs/WithProtection';
-import { useGetProductQuery } from '../../../shared/store/api/productsApi';
-import { ProductCartCounter } from '../../../shared/ui/ProductCartCounter/ui/ProductCartCounter';
+import { LikeButton } from '../../../features/ui/LikeButton';
+import { Price } from '../../../shared/ui/Price';
+import { PageHeader } from '../../../shared/ui/PageHeader';
+import { ReviewList } from '../../../features/review';
+import { WithProtection } from '../../../shared/features/WithProtection';
+import { useGetProductQuery } from '../../../entities/product/api/productsApi';
+import { ProductCartCounter } from '../../../entities/product/ui/ProductCartCounter/ProductCartCounter';
 import { useAppSelector } from '../../../shared/store/utils';
-import { cartSelectors } from '../../../shared/store/slices/cart';
-import { CartCounter } from '../../../shared/ui/CartCounter';
+import { cartSelectors } from '../../../entities/cart';
+import { CartCounter } from '../../../entities/cart/ui/CartCounter/CartCounter';
 
 export const ProductPage = WithProtection(() => {
 	const location = useLocation();
@@ -27,14 +29,21 @@ export const ProductPage = WithProtection(() => {
 		return <></>;
 	}
 
-	const { id, name, images, description, price, discount } = product;
+	const { id, name, images, description, price, discount, likes } = product;
 
 	const isProductInCart = !!cartProducts.find((p) => p.id === id);
+
+	const isLiked = likes.some((l) => l.userId === 'current-user-id'); // Replace with actual user ID logic
+
+	const handleLikeToggle = () => {
+		// Like logic should be handled at the feature/page level
+		// This component only presents the state
+	};
 
 	return (
 		<>
 			<ButtonBack />
-			<h1 className={classNames(s['header-title'])}>{name}</h1>
+			<PageHeader title={name} />
 			<p className='acticul'>
 				Артикул: <b>2388907</b>
 			</p>
@@ -44,14 +53,12 @@ export const ProductPage = WithProtection(() => {
 					<img src={images} alt={description} />
 				</div>
 				<div className={classNames(s['product__desc'])}>
-					<div className={classNames(s['price-big'], s['price-wrap'])}>
-						<span className={classNames(s['price_old'], s['price_left'])}>
-							{`${price} ₽`}
-						</span>
-						<span className={classNames(s['price_discount'], s['price'])}>
-							{`${price - discount} ₽`}
-						</span>
-					</div>
+					<Price
+						price={price}
+						discountPrice={discount}
+						size='big'
+						align='left'
+					/>
 
 					{isProductInCart ? (
 						<CartCounter productId={id} />
@@ -59,7 +66,7 @@ export const ProductPage = WithProtection(() => {
 						<ProductCartCounter product={product} />
 					)}
 
-					<LikeButton product={product} />
+					<LikeButton isActive={isLiked} onClick={handleLikeToggle} />
 					<div className={classNames(s['product__delivery'])}>
 						<img src={truckSVG} alt='truck' />
 						<div className={classNames(s['product__right'])}>

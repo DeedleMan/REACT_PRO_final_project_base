@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import s from '../../CartPage.module.css';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { cartActions } from '../../../../../shared/store/slices/cart';
-import { CartCounter } from '../../../../../shared/ui/CartCounter';
+import { cartActions, CartCounter } from '@entities/cart';
+import { Button } from '../../../../../shared/ui/Button';
+import { Price } from '../../../../../shared/ui/Price';
 
 type CartItemProps = {
 	product: CartProduct;
@@ -37,20 +38,17 @@ export const CartItem = ({ product }: CartItemProps) => {
 							<CartCounter productId={id} />
 
 							<div className={classNames(s['cart-item__price'])}>
-								<div className={classNames(s['price-big'], s['price-wrap'])}>
-									<span
-										className={classNames(s['price_old'], s['price_right'])}>
-										{price}
-									</span>
-									<span className={classNames(s['price_discount'], s['price'])}>
-										{price - discount}
-									</span>
-								</div>
+								<Price
+									price={price}
+									discountPrice={discount}
+									size='big'
+									align='right'
+								/>
 							</div>
 						</div>
-						<button className={classNames(s['cart-item__bnt-trash'])}>
+						<Button variant='trash'>
 							<TrashIcon onClick={handleDelete} />
-						</button>
+						</Button>
 					</div>
 				</div>
 			</div>

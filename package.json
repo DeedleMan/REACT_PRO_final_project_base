@@ -24,6 +24,7 @@
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.42.0",
 		"eslint-config-prettier": "^8.8.0",
+		"eslint-import-resolver-webpack": "0.13.11",
 		"eslint-plugin-eslint-comments": "^3.2.0",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
@@ -79,9 +80,8 @@
 		"yup": "^1.4.0"
 	},
 	"lint-staged": {
-		"*.{css,scss}": "npm stylelint:fix",
-		"*.{js,jsx,ts,tsx}": "npm lint",
-		"*.{js,jsx,ts,tsx,json,css,scss,md}": "npm format"
+		"*.{js,jsx,ts,tsx}": "npm run lint",
+		"*.{js,jsx,ts,tsx,json,css,scss,md}": "npm run format"
 	},
 	"config": {
 		"commitizen": {

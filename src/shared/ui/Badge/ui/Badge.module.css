@@ -1,0 +1,22 @@
+.badge {
+	padding: 2px 8px;
+	font-weight: 800;
+	font-size: 16px;
+	line-height: 20px;
+	border-radius: 20px;
+}
+
+.badge_type_new {
+	color: #ffffff;
+	background-color: #03a9f4;
+}
+
+.badge_type_sale {
+	color: #ffffff;
+	background-color: #01a54e;
+}
+
+.badge_type_discount {
+	color: #ffffff;
+	background-color: #f44336;
+}

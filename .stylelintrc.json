@@ -44,7 +44,12 @@
 		"declaration-property-unit-allowed-list": {
 			"line-height": ["px"]
 		},
-		"selector-class-pattern": "^[a-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(_[a-z0-9]+(-[a-z0-9]+)*)?(_[a-z0-9]+(-[a-z0-9]+)*)?$",
+		"selector-class-pattern": [
+			"^[a-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*(__[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)?(_[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)?(_[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)?$",
+			{
+				"message": "Expected class selector to match BEM pattern"
+			}
+		],
 		"selector-attribute-quotes": "always",
 		"selector-pseudo-element-colon-notation": "double",
 		"selector-type-case": "lower",
