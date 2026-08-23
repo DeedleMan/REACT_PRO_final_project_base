@@ -33,12 +33,7 @@ export const ProductPage = WithProtection(() => {
 
 	const isProductInCart = !!cartProducts.find((p) => p.id === id);
 
-	const isLiked = likes.some((l) => l.userId === 'current-user-id'); // Replace with actual user ID logic
-
-	const handleLikeToggle = () => {
-		// Like logic should be handled at the feature/page level
-		// This component only presents the state
-	};
+	const isLiked = likes.some((l) => l.userId === 'current-user-id');
 
 	return (
 		<>
@@ -66,7 +61,7 @@ export const ProductPage = WithProtection(() => {
 						<ProductCartCounter product={product} />
 					)}
 
-					<LikeButton isActive={isLiked} onClick={handleLikeToggle} />
+					<LikeButton isActive={isLiked} onClick={() => false} />
 					<div className={classNames(s['product__delivery'])}>
 						<img src={truckSVG} alt='truck' />
 						<div className={classNames(s['product__right'])}>

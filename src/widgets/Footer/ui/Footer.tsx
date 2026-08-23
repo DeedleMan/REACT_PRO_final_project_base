@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import classNames from 'classnames';
 import Instagram from '../../../shared/assets/images/instagram.svg';
 import Telegram from '../../../shared/assets/images/telegram.svg';
@@ -6,8 +7,12 @@ import Vk from '../../../shared/assets/images/vk.svg';
 import Whatsapp from '../../../shared/assets/images/whatsapp.svg';
 import s from './Footer.module.css';
 import { Logo } from '../../../shared/ui/Logo';
+import { Modal } from '../../../shared/ui/Modal';
+import { Button } from '../../../shared/ui/Button';
 
 export const Footer = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	return (
 		<footer className={s.footer}>
 			<div className='container'>
@@ -32,6 +37,7 @@ export const Footer = () => {
 							<a href='/catalogue' className={s['menu-bottom__item']}>
 								Отзывы
 							</a>
+							<Button onClick={() => setIsModalOpen(true)}>Test Modal</Button>
 						</nav>
 					</div>
 					<div className={s['footer__col']}>
@@ -93,6 +99,12 @@ export const Footer = () => {
 						</div>
 					</div>
 				</div>
+				<Modal
+					isOpen={isModalOpen}
+					onClose={() => setIsModalOpen(false)}
+					title='Test Modal'>
+					<p>Это пример модального окна.</p>
+				</Modal>
 			</div>
 		</footer>
 	);
