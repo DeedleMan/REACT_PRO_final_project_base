@@ -13,9 +13,6 @@ module.exports = {
 			node: {
 				extensions: ['.js', '.jsx', '.ts', '.tsx'],
 			},
-			webpack: {
-				config: 'webpack/webpack.common.js',
-			},
 		},
 	},
 	extends: [
@@ -40,5 +37,8 @@ module.exports = {
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'import/no-unresolved': 'off',
+		'import/named': 'off',
+		'import/namespace': 'off',
 	},
 };

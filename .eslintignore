@@ -1,6 +1,5 @@
 node_modules
 public
-.eslintrc.js
 storybook-static
 build
 dist

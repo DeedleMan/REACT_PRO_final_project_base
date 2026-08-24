@@ -6,6 +6,8 @@ import { LikeButton } from '@features/ui/LikeButton';
 import { useAppSelector } from '@shared/store/utils';
 import { cartSelectors, CartCounter } from '@entities/cart';
 import { useAddToCart } from '@shared/hooks/useAddToCart';
+import { userSelectors } from '@entities/user';
+import { useToggleLike } from '@shared/hooks/useToggleLike';
 import { Button } from '@shared/ui/Button';
 import { Badge } from '@shared/ui/Badge';
 
@@ -17,8 +19,9 @@ export const Card = ({ product }: CardProps) => {
 	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
 	const isProductInCart = cartProducts.some((p) => p.id === id);
 	const { addProductToCart } = useAddToCart();
-
-	const isLiked = likes.some((l) => l.userId === 'current-user-id');
+	const user = useAppSelector(userSelectors.getUser);
+	const isLiked = likes.some((l) => l.userId === user?.id);
+	const { toggleLike } = useToggleLike(id, isLiked);
 
 	return (
 		<article className={s['card']}>
@@ -40,7 +43,7 @@ export const Card = ({ product }: CardProps) => {
 					s['card__sticky'],
 					s['card__sticky_type_top-right']
 				)}>
-				<LikeButton isActive={isLiked} onClick={() => false} />
+				<LikeButton isActive={isLiked} onClick={toggleLike} />
 			</div>
 			<Link className={s['card__link']} to={`/products/${id}`}>
 				<img

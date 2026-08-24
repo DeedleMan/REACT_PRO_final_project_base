@@ -14,6 +14,8 @@ import { useGetProductQuery } from '../../../entities/product/api/productsApi';
 import { ProductCartCounter } from '../../../entities/product/ui/ProductCartCounter/ProductCartCounter';
 import { useAppSelector } from '../../../shared/store/utils';
 import { cartSelectors } from '../../../entities/cart';
+import { userSelectors } from '../../../entities/user';
+import { useToggleLike } from '../../../shared/hooks/useToggleLike';
 import { CartCounter } from '../../../entities/cart/ui/CartCounter/CartCounter';
 
 export const ProductPage = WithProtection(() => {
@@ -22,18 +24,21 @@ export const ProductPage = WithProtection(() => {
 	const productId = pathname.split('/').at(-1) || '';
 
 	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
+	const user = useAppSelector(userSelectors.getUser);
 
 	const { data: product } = useGetProductQuery({ id: productId });
+
+	const isProductInCart = !!cartProducts.find((p) => p.id === productId);
+
+	const { id, name, images, description, price, discount, likes } =
+		product ?? ({} as Product);
+
+	const isLiked = likes?.some((l) => l.userId === user?.id) ?? false;
+	const { toggleLike } = useToggleLike(id, isLiked);
 
 	if (!product) {
 		return <></>;
 	}
-
-	const { id, name, images, description, price, discount, likes } = product;
-
-	const isProductInCart = !!cartProducts.find((p) => p.id === id);
-
-	const isLiked = likes.some((l) => l.userId === 'current-user-id');
 
 	return (
 		<>
@@ -61,7 +66,7 @@ export const ProductPage = WithProtection(() => {
 						<ProductCartCounter product={product} />
 					)}
 
-					<LikeButton isActive={isLiked} onClick={() => false} />
+					<LikeButton isActive={isLiked} onClick={toggleLike} />
 					<div className={classNames(s['product__delivery'])}>
 						<img src={truckSVG} alt='truck' />
 						<div className={classNames(s['product__right'])}>
