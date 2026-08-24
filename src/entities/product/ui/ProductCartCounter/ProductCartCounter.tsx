@@ -4,6 +4,7 @@ import { useCount } from '../../hooks/useCount';
 import { useAddToCart } from '@shared/hooks/useAddToCart';
 import { Button } from '@shared/ui/Button';
 import { Input } from '@shared/ui/Input';
+import { Counter, CounterAction } from '@shared/ui/Counter';
 
 type ProductCartCounterProps = {
 	product: Product;
@@ -14,10 +15,10 @@ export const ProductCartCounter = ({ product }: ProductCartCounterProps) => {
 
 	return (
 		<div className={classNames('product__btn-wrap')}>
-			<div className={s['button-count']}>
-				<Button variant='counter-minus' onClick={handleCountMinus}>
+			<Counter>
+				<CounterAction variant='minus' onClick={handleCountMinus}>
 					-
-				</Button>
+				</CounterAction>
 				<Input
 					type='number'
 					variant='counter'
@@ -25,10 +26,10 @@ export const ProductCartCounter = ({ product }: ProductCartCounterProps) => {
 					value={count}
 					onChange={handleCount}
 				/>
-				<Button variant='counter-plus' onClick={handleCountPlus}>
+				<CounterAction variant='plus' onClick={handleCountPlus}>
 					+
-				</Button>
-			</div>
+				</CounterAction>
+			</Counter>
 			<Button
 				onClick={() => addProductToCart({ ...product, count })}
 				variant='primary'>

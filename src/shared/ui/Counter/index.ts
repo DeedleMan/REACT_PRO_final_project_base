@@ -1,2 +1,2 @@
-export { Counter } from './ui/Counter';
-export type { CounterProps } from './ui/Counter';
+export { Counter, CounterAction } from './ui/Counter';
+export type { CounterProps, CounterActionProps } from './ui/Counter';

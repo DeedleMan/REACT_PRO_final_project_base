@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -24,6 +24,12 @@ export const SignUpForm: FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [signUpRequestFn] = useSignUpMutation();
+	const emailRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		emailRef.current?.focus();
+	}, []);
+
 	const {
 		control,
 		handleSubmit,
@@ -91,6 +97,7 @@ export const SignUpForm: FC = () => {
 								autoComplete='email'
 								error={!!errors.email?.message}
 								helperText={errors.email?.message}
+								inputRef={emailRef}
 								{...field}
 							/>
 						)}
