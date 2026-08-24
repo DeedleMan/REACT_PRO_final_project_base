@@ -18,12 +18,7 @@ export const Card = ({ product }: CardProps) => {
 	const isProductInCart = cartProducts.some((p) => p.id === id);
 	const { addProductToCart } = useAddToCart();
 
-	const handleLikeToggle = () => {
-		// Like logic should be handled at the feature/page level
-		// This component only presents the state
-	};
-
-	const isLiked = likes.some((l) => l.userId === 'current-user-id'); // Replace with actual user ID logic
+	const isLiked = likes.some((l) => l.userId === 'current-user-id');
 
 	return (
 		<article className={s['card']}>
@@ -45,7 +40,7 @@ export const Card = ({ product }: CardProps) => {
 					s['card__sticky'],
 					s['card__sticky_type_top-right']
 				)}>
-				<LikeButton isActive={isLiked} onClick={handleLikeToggle} />
+				<LikeButton isActive={isLiked} onClick={() => false} />
 			</div>
 			<Link className={s['card__link']} to={`/products/${id}`}>
 				<img
