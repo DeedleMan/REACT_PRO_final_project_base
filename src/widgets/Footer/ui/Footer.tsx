@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import classNames from 'classnames';
 import Instagram from '../../../shared/assets/images/instagram.svg';
 import Telegram from '../../../shared/assets/images/telegram.svg';
@@ -12,6 +12,17 @@ import { Button } from '../../../shared/ui/Button';
 
 export const Footer = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	// useRef для подсчёта кликов без перерендера
+	const clickCountRef = useRef(0);
+	const counterRef = useRef<HTMLSpanElement>(null);
+
+	const handleButtonClick = () => {
+		clickCountRef.current += 1; // Изменяем ref — нет перерендера
+		if (counterRef.current) {
+			counterRef.current.textContent = `Кликов: ${clickCountRef.current}`; // Прямое обновление DOM
+		}
+	};
 
 	return (
 		<footer className={s.footer}>
@@ -37,6 +48,10 @@ export const Footer = () => {
 							<a href='/catalogue' className={s['menu-bottom__item']}>
 								Отзывы
 							</a>
+							<span ref={counterRef} className={s['counter']}>
+								Кликов: 0
+							</span>
+							<Button onClick={handleButtonClick}>Ckick counter += 1 </Button>
 							<Button onClick={() => setIsModalOpen(true)}>Test Modal</Button>
 						</nav>
 					</div>
