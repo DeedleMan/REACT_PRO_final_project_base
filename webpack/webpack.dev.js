@@ -15,8 +15,8 @@ module.exports = {
 	plugins: [
 		new ReactRefreshWebpackPlugin(),
 		// Подменяем NODE_ENV на production - для React Profiler
-		new webpack.DefinePlugin({
+		/* new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production'),
-		}),
+		}), */
 	],
 };
