@@ -54,9 +54,7 @@ export const HomePage = WithProtection(() => {
 	return (
 		<>
 			<CardList title='Лакомства' products={products} />
-			{isFetching && (
-				<LoadMore isEndOfList={isEndOfList} isFetching={isFetching} ref={ref} />
-			)}
+			<LoadMore isEndOfList={isEndOfList} isFetching={isFetching} ref={ref} />
 		</>
 	);
 });
