@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import {
 	Avatar,
 	Box,
@@ -25,6 +25,12 @@ export const SignInForm: FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [signInRequestFn] = useSignInMutation();
+	const emailRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		emailRef.current?.focus();
+	}, []);
+
 	const {
 		control,
 		handleSubmit,
@@ -96,6 +102,7 @@ export const SignInForm: FC = () => {
 								autoComplete='email'
 								error={!!errors.email?.message}
 								helperText={errors.email?.message}
+								inputRef={emailRef}
 								{...field}
 							/>
 						)}
